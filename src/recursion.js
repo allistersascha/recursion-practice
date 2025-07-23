@@ -1,36 +1,82 @@
 // Solve all of the following prompts using recursion.
+//don't worry about the blue ones 
 
 // 1. Calculate the factorial of a number.  The factorial of a non-negative integer n,
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5);  // 120
-var factorial = function(n) {
- 
+var factorial = function(n, output=1) {
+  //base
+  if(n === 0){
+    return output;
+  }else if (n < 0){
+    return null;
+  };
+  //recursion
+  //how do I shot default param?
+  //what to output each step?
+  output *= n;
+
+  return factorial(n-1, output);
+
 };
 
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
 var sum = function(array) {
+  let sum = 0;
+  if(array.length === 0){
+    return sum;
+  }
+  sum += array[0];
+  return sum(array.slice(1));
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  let flatForkFri = array.flat(Infinity);
+  let count = 0;
+  if (flatForkFri.length === 0){
+    return count;
+  }
+  count += flatForkFri[0];
+  return arraySum(flatForkFri.slice(1))
 };
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  let sum = 0;
+  if (n === 0){
+    return sum;
+  }
+  sum += n;
+  return sumBelow(n-1);
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y) {
+  let int = [];
+  if (x === y){
+    int.push(x);
+    return int;
+  }
+  else if (x > y){
+    int.push(x);
+    return range(x-1, y);
+  }else if (y>x){
+    int.push(y);
+    return range(y-1, x);
+  }
+  
 };
 
 // 7. Compute the exponent of a number.
@@ -39,6 +85,7 @@ var range = function(x, y) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  
 };
 
 // 8. Determine if a number is a power of two.
