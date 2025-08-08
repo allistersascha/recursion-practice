@@ -1,6 +1,7 @@
 // Solve all of the following prompts using recursion.
 //don't worry about the blue ones 
 
+
 // 1. Calculate the factorial of a number.  The factorial of a non-negative integer n,
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
@@ -20,17 +21,25 @@ var factorial = function(n, output=1) {
   return factorial(n-1, output);
 
 };
-
+ var sum = function(array){
+  if (array.length === 0){
+    return 0;
+    }else{
+    return sum(array.slice(1, array.length)) + array[0];
+  }
+ }
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
-  let sum = 0;
+/*var sum = function(array, output=0) {
+  //base
   if(array.length === 0){
-    return sum;
-  }
-  sum += array[0];
-  return sum(array.slice(1));
+    return output;
+    }
+    //recursion
+  output += array[0];
+  return sum(array.slice(1, array.length), output);
 };
+*/
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
@@ -46,7 +55,14 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
-  
+  //base
+  if (n === 0){
+    return true;
+  }else if(n > 0){
+    return !isEven(n-1);
+  }else{
+    return !isEven(n+1);
+  }
 };
 
 // 5. Sum all integers below a given integer.
@@ -55,52 +71,87 @@ var isEven = function(n) {
 var sumBelow = function(n) {
   let sum = 0;
   if (n === 0){
-    return sum;
+      return sum;
+    }else if(n>0){
+      sum += (n-1);
+      return sumBelow(n-1) + sum;
+    }else{
+      sum += (n+1);
+      return sumBelow(n+1) + sum;
   }
-  sum += n;
-  return sumBelow(n-1);
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
-  let int = [];
+//she wanna go infinite lmao 
+
+var range = function(x, y, arr=[]) {
+  //let arr = [];
   if (x === y){
-    int.push(x);
-    return int;
-  }
-  else if (x > y){
-    int.push(x);
-    return range(x-1, y);
-  }else if (y>x){
-    int.push(y);
-    return range(y-1, x);
-  }
-  
+    arr.pop();
+      return arr;
+    }else if (x > y){
+        arr.push(x - 1);
+        return range(x - 1, y, arr);
+    }else if (x < y){
+        arr.push(x + 1);
+        return range(x + 1, y, arr);
+    }
 };
+
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
+
 var exponent = function(base, exp) {
-  
-};
+  if (exp === 0){
+    return 1;
+  }else if (exp === 1){
+    return base;
+    //negative numbers
+  }else if (exp < 0){
+    return 1/exponent(base, (exp * -1));
+  }else {
+    return base * exponent(base, (exp - 1));
+  //}else{
+    //return exponent((base * exp-1), exp);
+  }
+}; 
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string) {
+var reverse = function(string, reverseArr=[]) {
+  //let reverseArr = [];
+  if (string.length === 0){
+    return reverseArr.join("");
+  }else{
+    reverseArr.push(string.charAt(string.length-1));
+    return reverse(string.slice(0, string.length-1), reverseArr);
+  }
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  let lilString = string.toLowerCase();
+  let cramString = lilString.split(" ").join("");
+  if (cramString.length === 0){
+    return true;
+    }else if (cramString.charAt(0) !== cramString.at(-1)){
+      return false;
+    }else{
+      return palindrome(cramString.slice(1, -1));
+    }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -142,11 +193,23 @@ var compareStr = function(str1, str2) {
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, arr=[]){
+  if (str.length === 0){
+    return arr;
+  }else{
+    arr.push(str.charAt(0));
+    return createArray(str.slice(1, str.length), arr);
+  }
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (array, newArr=[]) {
+  if (array.length === 0){
+    return [];
+  }else{
+    newArr.unshift(array[0]);
+    return 
+  }
 };
 
 // 18. Create a new array with a given value and length.
