@@ -117,8 +117,6 @@ var exponent = function(base, exp) {
     return 1/exponent(base, (exp * -1));
   }else {
     return base * exponent(base, (exp - 1));
-  //}else{
-    //return exponent((base * exp-1), exp);
   }
 }; 
 
@@ -127,6 +125,7 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+//base case
 
 };
 
@@ -167,6 +166,21 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
+  if ((x === 0) || (y === 0)){
+    return 0;
+  }else if (x === 1){   
+    return y;
+  }else if (y === 1){
+    return x;
+  }else if (x < 0){
+    x = -x;
+    return x + -multiply(x, (y - 1));
+  }else if (y < 0){
+    y = -y;
+    return x + -multiply(x, (y - 1));
+  }else{
+    return x + multiply(x, (y - 1));
+  }
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
@@ -189,6 +203,13 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  if ((str1.length === 0) && (str2.length === 0)){
+    return true;
+  }else if (str1[0] === str2[0]){
+    return compareStr(str1.slice(1, str1.length), str2.slice(1, str2.length));
+  }else{
+    return false;
+  }
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -205,10 +226,10 @@ var createArray = function(str, arr=[]){
 // 17. Reverse the order of an array
 var reverseArr = function (array, newArr=[]) {
   if (array.length === 0){
-    return [];
+    return newArr;
   }else{
     newArr.unshift(array[0]);
-    return 
+    return reverseArr(array.splice(1, array.length-1), newArr);
   }
 };
 
@@ -269,6 +290,13 @@ var nthFibo = function(n) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(input) {
+  let capArr = [];
+  if (input.length === 0){
+    return capArr;
+  }else{
+    capArr.push(input[0].toUpperCase());
+    return capitalizeWords(input.splice(1, input.length), capArr);
+  }
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
