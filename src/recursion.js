@@ -126,9 +126,14 @@ var exponent = function(base, exp) {
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
 //base case
-
+  if ((n === 1) || (n === 2)){
+    return true;
+  }else if ((n < 1) || n % 2 !== 0){
+    return false;
+  }else if (n >= 2){
+    return powerOfTwo(n/2);
+  }
 };
-
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string, reverseArr=[]) {
   //let reverseArr = [];
@@ -159,7 +164,7 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
-  
+
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
@@ -248,7 +253,15 @@ var buildList = function(value, length, newArr=[]) {
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function(array, value) {
+var countOccurrence = function(array, value, count=0) {
+  if (array.length === 0){
+    return count;
+  }else if (array[0] === value){
+    count++;
+    return countOccurrence(array.slice(1), value, count);
+  }else{
+    return countOccurrence(array.slice(1), value, count);
+  }
 };
 
 // 20. Write a recursive version of map.
@@ -281,7 +294,12 @@ var replaceKeysInObj = function(obj, key, newKey) {
 // Example:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
 // Note:  The 0 is not counted.
-var fibonacci = function(n) {
+var fibonacci = function(n, arr=[]) {
+  if (n === 0){
+    return arr;
+  }else{
+    arr.push()
+  }
 };
 
 // 25. Return the Fibonacci number located at index n of the Fibonacci sequence.
