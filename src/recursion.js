@@ -174,10 +174,10 @@ var multiply = function(x, y) {
     return x;
   }else if (x < 0){
     x = -x;
-    return x + -multiply(x, (y - 1));
+    return -multiply(x, (y-1));
   }else if (y < 0){
     y = -y;
-    return x + -multiply(x, (y - 1));
+    return -multiply(x, (y-1));
   }else{
     return x + multiply(x, (y - 1));
   }
@@ -236,7 +236,13 @@ var reverseArr = function (array, newArr=[]) {
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
-var buildList = function(value, length) {
+var buildList = function(value, length, newArr=[]) {
+  if (length === 0){
+    return newArr;
+  }else{
+    newArr.push(value);
+    return buildList(value, length-1, newArr);
+  }
 };
 
 // 19. Count the occurence of a value inside a list.
@@ -289,8 +295,7 @@ var nthFibo = function(n) {
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
-var capitalizeWords = function(input) {
-  let capArr = [];
+var capitalizeWords = function(input, capArr=[]) {
   if (input.length === 0){
     return capArr;
   }else{
@@ -301,7 +306,13 @@ var capitalizeWords = function(input) {
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
-var capitalizeFirst = function(array) {
+var capitalizeFirst = function(array, capArr=[]) {
+  if (array.length === 0){
+    return capArr;
+  }else{
+    capArr.push(array[0][0].toUpperCase() + array[0].slice(1, array[0].length));
+    return capitalizeFirst(array.slice(1, array.length), capArr);
+  }
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
