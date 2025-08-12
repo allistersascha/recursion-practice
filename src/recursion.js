@@ -174,10 +174,10 @@ var multiply = function(x, y) {
     return x;
   }else if (x < 0){
     x = -x;
-    return -multiply(x, (y-1));
+    return -multiply(x, y);
   }else if (y < 0){
     y = -y;
-    return -multiply(x, (y-1));
+    return -multiply(x, y);
   }else{
     return x + multiply(x, (y - 1));
   }
@@ -334,7 +334,12 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj={}) {
+  if (str.length === 0){
+    return obj;
+  }else{
+    obj[str[0]]
+  }
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
