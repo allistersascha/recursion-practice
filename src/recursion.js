@@ -267,7 +267,12 @@ var countOccurrence = function(array, value, count=0) {
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback, output=[]) {
-  
+  if (array.length === 0){
+    return output;
+  }else{
+    output.push(callback(array[0]));
+    return rMap(array.slice(1), callback, output);
+  }
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -295,11 +300,7 @@ var replaceKeysInObj = function(obj, key, newKey) {
 // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
 // Note:  The 0 is not counted.
 var fibonacci = function(n, arr=[]) {
-  if (n === 0){
-    return arr;
-  }else{
-    arr.push()
-  }
+
 };
 
 // 25. Return the Fibonacci number located at index n of the Fibonacci sequence.
@@ -307,7 +308,14 @@ var fibonacci = function(n, arr=[]) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function(n) {
+var nthFibo = function(n, fib=0) {
+  if (n === 0){
+    return fib;
+  }else if (n < 0){
+    return null;
+  }else{
+    return nthFibo((n-1), (fib + fib));
+  }
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
@@ -355,8 +363,12 @@ var flatten = function(arrays) {
 var letterTally = function(str, obj={}) {
   if (str.length === 0){
     return obj;
+  }else if (Object.hasOwn(obj, str[0])){
+    obj[str[0]]++;
+    return letterTally(str.slice(1), obj);
   }else{
-    obj[str[0]]
+    obj[str[0]] = 1;
+    return letterTally(str.slice(1), obj);
   }
 };
 
